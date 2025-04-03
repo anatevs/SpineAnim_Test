@@ -22,7 +22,7 @@ namespace GameCore
         {
             _aParabolicCoef = -tanTheta / distanceX;
 
-            _cParabolicCoef = tanTheta / 4;
+            _cParabolicCoef = tanTheta * distanceX / 4;
         }
     }
 }
