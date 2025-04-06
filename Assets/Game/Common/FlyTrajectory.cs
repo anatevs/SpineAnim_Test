@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace GameCore
 {
-    public class FlyTrajectory : MonoBehaviour
+    public sealed class FlyTrajectory : MonoBehaviour
     {
         [SerializeField]
         private float _tanTheta = 0.5f;
@@ -31,7 +30,7 @@ namespace GameCore
             SetInitPos(transform.position);
 
 
-            Debug.Log($"{Mathf.Atan(_tanTheta) * Mathf.Rad2Deg}, {Mathf.Acos(0) * Mathf.Rad2Deg}");
+            //Debug.Log($"{Mathf.Atan(_tanTheta) * Mathf.Rad2Deg}, {Mathf.Acos(0) * Mathf.Rad2Deg}");
         }
 
         [SerializeField]
