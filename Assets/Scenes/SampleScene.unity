@@ -287,7 +287,9 @@ MonoBehaviour:
   parentReference:
     TypeName: 
   autoRun: 1
-  autoInjectGameObjects: []
+  autoInjectGameObjects:
+  - {fileID: 405399268}
+  _sightView: {fileID: 110759366}
 --- !u!4 &370574331
 Transform:
   m_ObjectHideFlags: 0
@@ -365,6 +367,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 405399269}
+  - component: {fileID: 405399271}
   - component: {fileID: 405399270}
   m_Layer: 0
   m_Name: Player
@@ -410,8 +413,24 @@ MonoBehaviour:
   - {fileID: 993196540}
   - {fileID: 1054107178}
   _angle: 45
-  _rotSpeed: 1
   _isRotate: 0
+--- !u!114 &405399271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405399268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d2ba2d78f860d844a775cd4c60c3064, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bodyTargetRotation: {fileID: 405399270}
+  _flyTrajectory: {fileID: 1667810087}
+  _targetAnglesRange:
+  - 89
+  - -40
 --- !u!1 &413995999
 GameObject:
   m_ObjectHideFlags: 0
@@ -1682,7 +1701,6 @@ GameObject:
   - component: {fileID: 1433540156}
   - component: {fileID: 1433540155}
   - component: {fileID: 1433540154}
-  - component: {fileID: 1433540158}
   - component: {fileID: 1433540159}
   m_Layer: 0
   m_Name: Archer
@@ -1795,24 +1813,6 @@ Transform:
   m_Father: {fileID: 405399269}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1433540158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1433540153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb0f34de4a5b93c4fa88e2f94feee09b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _skeletonAnimation: {fileID: 1433540154}
-  _angle: 30
-  _rotSpeed: 0.01
-  _isRotate: 0
-  _isPrintAngle: 0
-  _isRotating: 0
 --- !u!114 &1433540159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2036,10 +2036,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7767df62a70144648acd8415e66648bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tanTheta: 0.5
-  _distanceX: 10
   _speedX: 1
   _isFlying: 0
+  _spawnPoint: {fileID: 584514837}
   _isSetFly: 0
 --- !u!212 &1667810088
 SpriteRenderer:

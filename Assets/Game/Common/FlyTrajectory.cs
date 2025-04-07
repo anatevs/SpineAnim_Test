@@ -4,34 +4,24 @@ namespace GameCore
 {
     public sealed class FlyTrajectory : MonoBehaviour
     {
-        [SerializeField]
+        //[SerializeField]
         private float _tanTheta = 0.5f;
 
-        [SerializeField]
+        //[SerializeField]
         private float _distanceX = 5f;
 
         [SerializeField]
         private float _speedX = 1f;
 
-        private Vector3 _initPos;
-
-        private float _tStart;
-
         [SerializeField]
         private bool _isFlying;
 
-        public void SetInitPos(Vector3 initPos)
-        {
-            _initPos = initPos;
-        }
+        [SerializeField]
+        private Transform _spawnPoint;
 
-        private void Awake()
-        {
-            SetInitPos(transform.position);
+        private float _tStart;
 
-
-            //Debug.Log($"{Mathf.Atan(_tanTheta) * Mathf.Rad2Deg}, {Mathf.Acos(0) * Mathf.Rad2Deg}");
-        }
+        private ParabolaCalculation _parabola = new();
 
         [SerializeField]
         private bool _isSetFly;
@@ -42,41 +32,18 @@ namespace GameCore
             {
                 _isSetFly = false;
 
-                _isFlying = true;
-
-                _tStart = Time.time;
-
-                SetupTarget();
-
-                SetRotation(Mathf.Atan(_tanTheta) * Mathf.Rad2Deg);
-            }
-
-            if (_isFlying)
-            {
-                var x = (Time.time - _tStart) * _speedX - _distanceX / 2;
-
-                var y = BallisticCalculations.GetParabolaPointY(x);
-
-                var theta = Mathf.Atan(BallisticCalculations.GetTangentCos(x)) * Mathf.Rad2Deg;
-
-                SetPosition(new Vector3(x + _distanceX/2, y, transform.position.z));
-                SetRotation(theta);
+                //StartFlying();
             }
         }
 
-        private void SetupTarget()
+        public void UpdateTrajectory(float tanTheta, float distanceX)
         {
-            BallisticCalculations.SetParabolaParams(_tanTheta, _distanceX, _speedX);
-        }
+            _parabola.UpdateParabolaParams(tanTheta, distanceX);
 
-        private void SetRotation(float angle)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, angle);
-        }
+            _tanTheta = tanTheta;
+            _distanceX = distanceX;
 
-        private void SetPosition(Vector3 pos)
-        {
-            transform.position = _initPos + pos;
+            //TODO: visualize trajectory
         }
     }
 }

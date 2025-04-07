@@ -1,22 +1,29 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace GameCore
 {
     public sealed class SightView : MonoBehaviour
     {
-        public event Action<Vector2> OnDrawLine;
-
         [SerializeField]
         private SightLine _sightLine;
 
-        public void SetupLine(Vector2 endPoint)
+        public Vector2 CalculateLine(Vector2 endPoint)
         {
             var lineVector = endPoint - (Vector2)transform.position;
 
-            _sightLine.SetLineLocal(lineVector);
+            return lineVector;
+        }
 
-            OnDrawLine?.Invoke(lineVector);
+        public void SetupLine(Vector2 endPoint)
+        {
+            var lineVector = CalculateLine(endPoint);
+
+            _sightLine.SetLineLocal(lineVector);
+        }
+
+        public void SetupLineDirection(Vector2 direction)
+        {
+            _sightLine.SetLineLocal(direction);
         }
     }
 }

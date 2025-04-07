@@ -10,11 +10,10 @@ namespace GameCore
         [SerializeField]
         private Transform[] _bodyTransform;
 
-        [SerializeField]
-        private float _angle;
+        private float _prevAngle;
 
         [SerializeField]
-        private float _rotSpeed = 1f;
+        private float _angle;
 
         [SerializeField]
         private bool _isRotate = false;
@@ -26,14 +25,28 @@ namespace GameCore
                 _isRotate = false;
 
 
-                var dir = new Vector3(-Mathf.Sin(_angle * Mathf.Deg2Rad), Mathf.Cos(_angle * Mathf.Deg2Rad), 0);
+                var dir = new Vector3(Mathf.Cos(_angle * Mathf.Deg2Rad), Mathf.Sin(_angle * Mathf.Deg2Rad), 0);
 
-                var rotQ = Quaternion.FromToRotation(Vector3.up, dir);
-
-                var angle = rotQ.eulerAngles.z;
-
-                RotateBody(angle);
+                RotateBody(dir);
             }
+        }
+
+        public void RotateToDefault()
+        {
+            RotateBody(0);
+        }
+
+        public void RotateBody(Vector2 direction)
+        {
+            var rotQ = Quaternion.FromToRotation(Vector3.right, direction);
+
+            var angle = rotQ.eulerAngles.z;
+
+            var deltaAngle = angle - _prevAngle;
+
+            RotateBody(deltaAngle);
+
+            _prevAngle = angle;
         }
 
         private void RotateBody(float angle)
