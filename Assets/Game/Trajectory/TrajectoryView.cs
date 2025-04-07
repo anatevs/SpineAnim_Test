@@ -47,22 +47,22 @@ namespace GameCore
                 point.SetParent(_parent);
 
                 _points[i] = point;
-
-                point.localPosition = new Vector2(i * 1 + _startPointX, 0);
             }
 
         }
 
         public void UpdatePoints(float distanceX, ParabolaCalculation parabola)
         {
-            var deltaX = distanceX / 2 / _centerNumber;
+            var deltaX = (distanceX / 2 - _startPointX) / _centerNumber;
 
-            _parent.position = _spawnPoint.position + _spawnPoint.right * _startPointX;
+            _parent.position = _spawnPoint.position;
+
 
             for (int i = 0; i < _points.Length; i++)
             {
-                var x = i * deltaX;
-                var y = parabola.GetParabolaPointY(x - distanceX/2);
+                var x = i * deltaX + _startPointX;
+                //var y = parabola.GetParabolaPointY(x - distanceX/2);
+                var y = parabola.GetParabolaPointY(x);
 
                 _points[i].localPosition = new Vector3(x, y);
             }

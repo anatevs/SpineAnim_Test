@@ -13,7 +13,7 @@ namespace Assets.Input
 
         public event Action OnDropped;
 
-        private GameControls _controls;
+        private readonly GameControls _controls;
 
         private Camera _camera;
 

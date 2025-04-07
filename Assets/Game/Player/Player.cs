@@ -1,5 +1,4 @@
 ﻿using Assets.Input;
-using System;
 using UnityEngine;
 using VContainer;
 
@@ -7,13 +6,11 @@ namespace GameCore
 {
     public class Player : MonoBehaviour
     {
-        public event Action<float, float> OnSightChanged;
-
         [SerializeField]
         private BodyTargetRotation _bodyTargetRotation;
 
         [SerializeField]
-        private FlyTrajectory _flyTrajectory;
+        private TrajectoryAndSpawn _flyTrajectory;
 
         [SerializeField]
         private float[] _targetAnglesRange = new float[2] {80, -40};
@@ -44,16 +41,37 @@ namespace GameCore
 
         private void OnEnable()
         {
-            _sightPresenter.Show();
-
-            _sightPresenter.OnDirectionChanged += ProcessSight;
+            ShowSight();
         }
 
         private void OnDisable()
         {
+            HideSight();
+        }
+
+
+        private void ShowSight()
+        {
+            _sightPresenter.Show();
+
+            _sightPresenter.OnDirectionChanged += ProcessSight;
+
+            _flyTrajectory.ShowTrajectory(true);
+
+            _input.OnDropped += _flyTrajectory.ShootProjectile;
+        }
+
+        private void HideSight()
+        {
             _sightPresenter.OnDirectionChanged -= ProcessSight;
 
+            _input.OnDropped -= _flyTrajectory.ShootProjectile;
+
             _sightPresenter.Hide();
+
+            _flyTrajectory.ShowTrajectory(false);
+
+            _input.OnDropped -= _flyTrajectory.ShootProjectile;
         }
 
         private void SetupConstraints()
@@ -107,9 +125,7 @@ namespace GameCore
 
             var distanceX = direction.magnitude / _defaultSightLength * _defaultWeaponDistance;
 
-            Debug.Log(distanceX);
-
-            _flyTrajectory.UpdateTrajectory(tan, distanceX);
+            _flyTrajectory.UpdateTrajectory(tan, distanceX, transform.position.y);
         }
     }
 }
