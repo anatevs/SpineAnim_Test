@@ -45,7 +45,7 @@ namespace GameCore
 
         void IDisposable.Dispose()
         {
-            Hide();
+            _input.OnDragging -= ProcessDragging;
         }
 
         public void SetConstrainDirection(Vector2 direction)

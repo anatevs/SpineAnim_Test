@@ -107,6 +107,8 @@ namespace GameCore
 
             var distanceX = direction.magnitude / _defaultSightLength * _defaultWeaponDistance;
 
+            Debug.Log(distanceX);
+
             _flyTrajectory.UpdateTrajectory(tan, distanceX);
         }
     }

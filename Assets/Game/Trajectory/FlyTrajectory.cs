@@ -4,6 +4,9 @@ namespace GameCore
 {
     public sealed class FlyTrajectory : MonoBehaviour
     {
+        [SerializeField]
+        private TrajectoryView _trajectoryView;
+
         //[SerializeField]
         private float _tanTheta = 0.5f;
 
@@ -19,12 +22,17 @@ namespace GameCore
         [SerializeField]
         private Transform _spawnPoint;
 
-        private float _tStart;
+        private readonly float _trajectoryStartXShift = 0.5f * 1.81f;
 
         private ParabolaCalculation _parabola = new();
 
         [SerializeField]
         private bool _isSetFly;
+
+        private void Awake()
+        {
+            _trajectoryView.Init(_spawnPoint, _trajectoryStartXShift);
+        }
 
         private void Update()
         {
@@ -43,7 +51,7 @@ namespace GameCore
             _tanTheta = tanTheta;
             _distanceX = distanceX;
 
-            //TODO: visualize trajectory
+            _trajectoryView.UpdatePoints(distanceX, _parabola);
         }
     }
 }
