@@ -9,6 +9,8 @@ namespace Assets.Input
         IInitializable,
         IDisposable
     {
+        public event Action OnDragStarted;
+
         public event Action<Vector2> OnDragging;
 
         public event Action OnDropped;
@@ -28,14 +30,21 @@ namespace Assets.Input
 
             _controls.Enable();
 
+            _controls.Gameplay.Drag.started += StartDragging;
             _controls.Gameplay.Drag.performed += FollowPointer;
             _controls.Gameplay.Drag.canceled += ReleasePointer;
         }
 
         void IDisposable.Dispose()
         {
+            _controls.Gameplay.Drag.started -= StartDragging;
             _controls.Gameplay.Drag.performed -= FollowPointer;
             _controls.Gameplay.Drag.canceled -= ReleasePointer;
+        }
+
+        private void StartDragging(InputAction.CallbackContext context)
+        {
+            OnDragStarted?.Invoke();
         }
 
         private void FollowPointer(InputAction.CallbackContext context)

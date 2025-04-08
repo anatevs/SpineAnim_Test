@@ -61,7 +61,6 @@ namespace GameCore
             for (int i = 0; i < _points.Length; i++)
             {
                 var x = i * deltaX + _startPointX;
-                //var y = parabola.GetParabolaPointY(x - distanceX/2);
                 var y = parabola.GetParabolaPointY(x);
 
                 _points[i].localPosition = new Vector3(x, y);

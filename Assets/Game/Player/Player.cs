@@ -7,6 +7,9 @@ namespace GameCore
     public class Player : MonoBehaviour
     {
         [SerializeField]
+        private PlayerAnimation _playerAnimation;
+
+        [SerializeField]
         private BodyTargetRotation _bodyTargetRotation;
 
         [SerializeField]
@@ -41,7 +44,7 @@ namespace GameCore
 
         private void OnEnable()
         {
-            ShowSight();
+            _input.OnDragStarted += ShowSight;
         }
 
         private void OnDisable()
@@ -59,6 +62,12 @@ namespace GameCore
             _flyTrajectory.ShowTrajectory(true);
 
             _input.OnDropped += _flyTrajectory.ShootProjectile;
+
+            _input.OnDropped += _playerAnimation.Shoot;
+
+            _input.OnDropped += HideSight;
+
+            _playerAnimation.SetSighting(true);
         }
 
         private void HideSight()
@@ -72,6 +81,12 @@ namespace GameCore
             _flyTrajectory.ShowTrajectory(false);
 
             _input.OnDropped -= _flyTrajectory.ShootProjectile;
+
+            _input.OnDropped -= _playerAnimation.Shoot;
+
+            _input.OnDropped -= HideSight;
+
+            _playerAnimation.SetSighting(false);
         }
 
         private void SetupConstraints()

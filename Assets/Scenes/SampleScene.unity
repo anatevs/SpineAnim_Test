@@ -449,6 +449,7 @@ GameObject:
   - component: {fileID: 405399269}
   - component: {fileID: 405399271}
   - component: {fileID: 405399270}
+  - component: {fileID: 405399272}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -464,7 +465,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 405399268}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.44, y: 0, z: 0}
+  m_LocalPosition: {x: -7.44, y: -2.84, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -507,11 +508,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d2ba2d78f860d844a775cd4c60c3064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerAnimation: {fileID: 405399272}
   _bodyTargetRotation: {fileID: 405399270}
   _flyTrajectory: {fileID: 437792922}
   _targetAnglesRange:
   - 89
   - -40
+--- !u!114 &405399272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405399268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2535ac5122874ba4282fffffa5a97df2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animation: {fileID: 1433540154}
+  _skeletonUtility: {fileID: 1433540159}
+  _attackFinish: {fileID: 11400000, guid: 45004f649083f4b49a7d8efcf76babaf, type: 2}
+  _attackTarget: {fileID: 11400000, guid: 2a0c1381d6e6c504cbf11ee25acf0af4, type: 2}
+  _idle: {fileID: 11400000, guid: 4bd8b28378737544fad782751da69fd5, type: 2}
 --- !u!1 &413995999
 GameObject:
   m_ObjectHideFlags: 0
