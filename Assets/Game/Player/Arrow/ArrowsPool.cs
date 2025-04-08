@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GameCore
 {
-    public class ArrowsPool
+    public sealed class ArrowsPool
     {
         private readonly Arrow _prefab;
 
@@ -28,11 +28,15 @@ namespace GameCore
 
             arrow.gameObject.SetActive(true);
 
+            arrow.OnAttackEnded += Unspawn;
+
             return arrow;
         }
 
         public void Unspawn(Arrow arrow)
         {
+            arrow.OnAttackEnded -= Unspawn;
+
             arrow.gameObject.SetActive(false);
 
             arrow.transform.SetParent(_poolParent);

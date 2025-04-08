@@ -18,6 +18,9 @@ namespace GameCore
         [SerializeField]
         private float[] _targetAnglesRange = new float[2] {80, -40};
 
+        [SerializeField]
+        private float _defaultWeaponDistance = 5f;
+
         private float[] _targetTanRange;
 
         private Vector2[] _directionsRange;
@@ -27,8 +30,6 @@ namespace GameCore
         private SightPresenter _sightPresenter;
 
         private float _defaultSightLength = 1f;
-
-        private float _defaultWeaponDistance = 5f;
 
         private Vector2 _weaponDirection;
 

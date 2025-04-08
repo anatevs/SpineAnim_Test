@@ -24,8 +24,10 @@ namespace GameCore
             {
                 _isRotate = false;
 
-
-                var dir = new Vector3(Mathf.Cos(_angle * Mathf.Deg2Rad), Mathf.Sin(_angle * Mathf.Deg2Rad), 0);
+                var dir = new Vector3(
+                    Mathf.Cos(_angle * Mathf.Deg2Rad),
+                    Mathf.Sin(_angle * Mathf.Deg2Rad),
+                    0);
 
                 RotateBody(dir);
             }
